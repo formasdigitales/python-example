@@ -1,7 +1,7 @@
 
 # Python-example
 
-Ejemplo de Timbrado con Delphi
+Ejemplo de Timbrado con Python
 <br/>
 
 ## Requerimientos
