@@ -51,6 +51,37 @@ La clase **ClienteFormas** contiene el código para poder hacer el sellado del C
 Contiene la funcion llamada get_sello la cual recibe el archivo XML que queremos sellar, el certificado y la llave privada para poder crear el sello y enviarlo al servicio web (dentro de esta funcion hacemos las llamadas a las demas funciones para generar la cadena original, el sello, y enviarlo al servicio web).
 
 
+```Python
+    def sellar(self):
+        #print(self.xml)
+        # Insertar fecha al documento (Opcional)
+        fecha = str(datetime.now().isoformat())[:19]
+        
+        tmpxml = ET.parse(self.xml).getroot()
+
+        certificado64 = self.get_certificado_64()
+        certificado = self.get_certificado_x509(certificado64)
+        no_certificado = self.get_no_certificado(hex(certificado.get_serial_number()))
+
+        # Insertar fecha al documento (Opcional)
+        tmpxml.attrib['Fecha'] = fecha
+        tmpxml.attrib['NoCertificado'] = no_certificado
+        tmpxml.attrib['Certificado'] = certificado64
+        
+        cadena_original = self.get_cadena_original(tmpxml)
+
+        sello = self.get_sello(cadena_original)
+
+        if self.DEBUG:
+            print('cadena original:  {0} \n Sello {1} \n Certificado {2} No de Certificado {3}\n'.format(cadena_original, sello, certificado64, no_certificado))
+
+        tmpxml.attrib['Sello'] = sello
+
+        return ET.tostring(tmpxml)
+        
+```
+
+
 ### def get_cadena_original(self, xml=None):
 A esta función le enviamos el documento XML para que nos genere la cadena original del documento la cual utilizaremos para generar el sello del CFDi.
 
