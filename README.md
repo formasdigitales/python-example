@@ -44,7 +44,7 @@ La clase **ClienteFormas** contiene el código para poder hacer el sellado del C
 
 <br/>
 
-## Métodos de la clase ClienteFormas
+## Funciones de la clase ClienteFormas
 
 
 ### def sellar(self):
