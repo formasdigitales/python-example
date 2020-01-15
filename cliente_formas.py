@@ -124,8 +124,7 @@ class ClienteFormas:
 
         return no_certificado
 
-    def get_cadena_original(self, xml=None):
-        #current_cfdi = ET.parse(file_xml)
+    def get_cadena_original(self, xml):
         xslt = ET.parse(self.xlst_path)
         transform = ET.XSLT(xslt)
         cadena_original = transform(xml)
