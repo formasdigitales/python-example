@@ -82,13 +82,12 @@ Contiene la funcion llamada get_sello la cual recibe el archivo XML que queremos
 ```
 
 
-### def get_cadena_original(self, xml=None):
+### def get_cadena_original(self, xml):
 A esta función le enviamos el documento XML para que nos genere la cadena original del documento la cual utilizaremos para generar el sello del CFDi.
 
 ```Python
 
-def get_cadena_original(self, xml=None):
-    #current_cfdi = ET.parse(file_xml)
+def get_cadena_original(self, xml):
     xslt = ET.parse(self.xlst_path)
     transform = ET.XSLT(xslt)
     cadena_original = transform(xml)
